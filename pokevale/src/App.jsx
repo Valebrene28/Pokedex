@@ -1,13 +1,14 @@
 
 import './App.css';
 import AppRouter from './appRouter';
-import pokemonContext from './Context/Context';
+import { Save } from './Context/Provider';
 
 function App() {
   return (
-    <pokemonContext>
+    <Save>
    <AppRouter />
-   </pokemonContext>
+   </Save>
+  
   );
 }
 
