@@ -1,3 +1,3 @@
 export * from "./Home"
 export * from "./Pokemons"
-export * from "./Search"
+export * from "../Search/Search"
