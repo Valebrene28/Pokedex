@@ -34,7 +34,7 @@
 
 body {
 	font-family: 'Montserrat';
-  background-color: #4646469d;
+  background-color: rgb(255, 255, 255);
 }
 /* Globales */
 .container {
@@ -67,7 +67,7 @@ header form {
 	align-items: center;
 	gap: 10px;
 
-	border: 1px solid #e9f500;
+	border: 1px solid #df389c;
 	padding: 15px 20px;
 	border-radius: 25px;
 }
@@ -84,7 +84,7 @@ header form {
 .icon-search {
 	width: 20px;
 	height: 20px;
-	stroke: #f5f906;
+	stroke: #df389c;
 }
 
 .btn-search {
@@ -93,16 +93,16 @@ header form {
 	border-radius: 25px;
 	padding: 15px 30px;
 	font-family: inherit;
-	color: #180000;
-	background-color:  #e7dc0a;;
+	color: #ffffff;
+	background-color:  #df389c;
 	cursor: pointer;
 	font-weight: 500;
 	letter-spacing: 2px;
 }
 
 .btn-search:hover {
-	background-color: rgb(16, 12, 14);
-	color: #f2fa00;
+	background-color: rgb(255, 255, 255);
+	color: #df389c;
 }
 
 /* Btn Filter */
@@ -122,7 +122,7 @@ header form {
 .icon-filter .icon {
 	width: 30px;
 	height: 30px;
-	stroke: #555;
+	stroke: #ffffff;
 }
 
 /* Card List Pokemon */
@@ -138,7 +138,7 @@ header form {
 }
 
 .card-img {
-	background-color: #f2f2f2;
+	background-color: #df389c63;
 
 	display: flex;
 	align-items: center;
@@ -157,12 +157,12 @@ header form {
 }
 
 .card-info h3 {
-	color: #333;
+	color: #020101;
 }
 
 .pokemon-id {
 	display: block;
-	color: #888;
+	color: #fffefe;
 	margin-bottom: 15px;
 }
 
@@ -262,7 +262,7 @@ header form {
 	left: -300px;
 	width: 250px;
 
-	color: #555;
+	color: #ffffff;
 	background-color: #f2f2f2;
 	height: 100%;
 	padding-top: 140px;
@@ -450,6 +450,6 @@ Styles of Pokemon Single Page
 
 .inputSearch {
 
-
-  background-color: #e7dc0a;
+	
+  background-color: #df389c;
 }

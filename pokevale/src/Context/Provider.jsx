@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import pokemonContext from "./Context";
+import { PokemonContext } from "./Context";
 import useForm from "../Hook/useform";
 
 
@@ -38,7 +38,7 @@ valueSearch: ""
     );
     const data = await res.json();
 
-    const trust = data.results.map(async (pokemon) => {
+    const trust = data.results.map(async pokemon => {
       const res = await fetch(pokemon.url);
       const data = await res.json();
       return data; 
@@ -58,16 +58,18 @@ valueSearch: ""
     const res = await fetch(`${baseURL}pokemon?limit=100&offset=0`);
     const data = await res.json();
 
-    const trust = data.results.map(async (pokemon) => {
+    const trust = data.results.map(async pokemon => {
       const res = await fetch(pokemon.url);
       const data = await res.json();
+      console.log(res)
       return data; 
+      
     });
     const results = await Promise.all(trust);
     setglobalPokemons(results);
     setloading(false)
     };
-
+    
     ////////////LLAMAR POR ID////////////////////
     const savePokemonsById = async(id) => {
       const baseURL = "https://pokeapi.co/api/v2/";
@@ -86,18 +88,18 @@ valueSearch: ""
     }, []);
 
     return (
-      <pokemonContext.Provider
+      <PokemonContext.Provider
         value={{
           valueSearch,
           change,
           reset,
-          savePokemons,
-          getGlobalPokemons,
+          allPokemons,
+          globalPokemons,
           savePokemonsById
         }}
       >
         {children}
-      </pokemonContext.Provider>
+      </PokemonContext.Provider>
     );
   };
 

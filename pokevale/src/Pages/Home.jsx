@@ -1,4 +1,6 @@
 import React from "react";
+import { Listap } from "../Components/listap";
+import { Filter } from "../Components";
 
 export const Home = () => {
   return (
@@ -25,7 +27,9 @@ export const Home = () => {
         <span>Filtrar</span>
       </div>
     </div>
-
+    <Listap />
+    <Filter />
+    
     </>
     
   );
