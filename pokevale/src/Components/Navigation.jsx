@@ -1,23 +1,58 @@
-import React, { useContext } from 'react'
-import { Link, Outlet } from 'react-router-dom'
+import React, { useContext, useState } from 'react'
+import { Link, Outlet, useNavigate, useNavigation } from 'react-router-dom'
 import { PokemonContext } from '../Context/Context'
 import image from "../imagen/image.png"
+import { Card } from './Card'
+
 
 export const Navigation = () => {
-	const context = useContext(PokemonContext)
 	
+	const [searchPokemon, setsearchPokemon] = useState("")
+	const [pokemon, setpokemon] = useState({})
+	const [isSearch, setisSearch] = useState(false)
 
+
+	const onSearch = async() => {
+		const baseURL = "https://pokeapi.co/api/v2/";
+		const res = await fetch(`${baseURL}pokemon/${searchPokemon}`);
+		const data = await res.json()
+		.then(resp => {
+			 setisSearch(true)													
+			 setpokemon(resp)
+			console.log(resp)
+		});
+		
+		
+	}
+
+		
+	const handleinput = (e) => {
+		setsearchPokemon(e.target.value.toLowerCase().trim())
+
+	}
+	
+	
+//////////////////////
+	const onSearchSubmit = async (e) => {
+		e.preventDefault();
+		const data = await onSearch(searchPokemon)
+		
+		
+		
+		
+
+	}
   return (
     <>
         <header className='container'>
-				
+				  <Link to= "/">
 					<img
 						src={image}
 						alt='Logo Pokedex'
 					/>
-				
-{/* onSubmit={onSearchSubmit} */}
-				<form >
+				</Link>
+
+				<form onSubmit={onSearchSubmit}>
 					<div className='form-group'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
@@ -39,14 +74,36 @@ export const Navigation = () => {
 							type='search'
 							name='valueSearch'
 							id=''
-							// value={valueSearch}
-							// onChange={onInputChange}
+							value={searchPokemon}
+							onChange={handleinput}
 							placeholder='Buscar nombre de pokemon'
 						/>
 					</div>
 
-					<button className='btn-search'>Buscar</button>
+					<button className='btn-search' onClick={onSearch}>Buscar</button>
 				</form>
+				{isSearch ? <Link to={`/pokemon/${pokemon?.id}`} className='card-pokemon'>
+    <div className='card-img'>
+      <img
+        src={pokemon?.sprites.other.dream_world.front_default}
+        alt={`Pokemon ${pokemon?.name}`}
+      />
+    </div>
+    <div className='card-info'>
+    <span className='pokemon-id'>N° {pokemon?.id}</span>
+      <h3>{pokemon?.name}</h3>
+      <div className='card-types'>
+        {pokemon?.types.map(type => (
+          <span key={type?.type.name} className={type?.type.name}>
+            {type?.type.name}
+          </span>
+        ))}
+      </div>
+    </div>
+  </Link>
+  : 
+		<Card />
+				}
 			</header>
 
 			<Outlet />

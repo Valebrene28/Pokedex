@@ -1,8 +1,7 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { Navigation } from "./Components/Navigation";
-import { Pokemons } from "./Pages/Pokemons";
-import { Home, Search } from "./Pages";
+import { Home, Search, Pokemons } from "./Pages";
 
 
 const AppRouter = () => {

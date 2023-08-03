@@ -5,9 +5,22 @@ import { Cargar } from "../Components";
 
 export const Pokemons = () => {
   const { getPokemonById } = useContext(PokemonContext);
+  const [pokemonName, setPokemonName] = useState("")
 
   const [loading, setloading] = useState(true);
   const [pokemon, setpokemon] = useState([]);
+  const [ pokemonId, setPokemonId] = useState(1);
+   
+  useEffect(()=> {
+    getEvolutions(pokemonId)
+  })
+
+  async function getEvolutions(id){
+    const response = await fetch(`https://pokeapi.co/api/v2/evolution-chain/${id}/`)
+    const data = await response.json()
+    setPokemonName(data.chain.species.name)
+  }
+
 
   const { id } = useParams();
 
@@ -19,7 +32,8 @@ export const Pokemons = () => {
 
   useEffect(() => {
     fetchPokemon(id);
-  }, []);
+    console.log("use usadooooooooo")
+  }, [pokemonId]);
 
   return (
     <main className="container main-pokemon">
@@ -28,18 +42,18 @@ export const Pokemons = () => {
       ) : (
         <>
           <div className="header-main-pokemon">
-            <span className="number-pokemon">#{pokemon?.id}</span>
+            <span className="number-pokemon">#{pokemon.id}</span>
             <div className="container-img-pokemon">
               <img
-                src={pokemon?.sprites.other.dream_world.front_default}
-                alt={`Pokemon ${pokemon?.name}`}
+                src={pokemon.sprites.other.dream_world.front_default}
+                alt={`Pokemon ${pokemon.name}`}
               />
             </div>
 
             <div className="container-info-pokemon">
               <h1>{pokemon?.name}</h1>
               <div className="card-types info-pokemon-type">
-                {pokemon?.types.map((type) => (
+                {pokemon.types.map((type) => (
                   <span key={type.type.name} className={`${type.type.name}`}>
                     {type.type.name}
                   </span>
@@ -48,11 +62,11 @@ export const Pokemons = () => {
               <div className="info-pokemon">
                 <div className="group-info">
                   <p>Altura</p>
-                  <span>{pokemon?.height}</span>
+                  <span>{pokemon.height}</span>
                 </div>
                 <div className="group-info">
                   <p>Peso</p>
-                  <span>{pokemon?.weight}KG</span>
+                  <span>{pokemon.weight}KG</span>
                 </div>
               </div>
             </div>
@@ -65,43 +79,46 @@ export const Pokemons = () => {
                 <span>Hp</span>
                 <div className="progress-bar"></div>
                 <span className="counter-stat">
-                  {pokemon?.stats[0].base_stat}
+                  {pokemon.stats[0].base_stat}
                 </span>
               </div>
               <div className="stat-group">
                 <span>Attack</span>
                 <div className="progress-bar"></div>
                 <span className="counter-stat">
-                  {pokemon?.stats[1].base_stat}
+                  {pokemon.stats[1].base_stat}
                 </span>
               </div>
               <div className="stat-group">
                 <span>Defense</span>
                 <div className="progress-bar"></div>
                 <span className="counter-stat">
-                  {pokemon?.stats[2].base_stat}
+                  {pokemon.stats[2].base_stat}
                 </span>
               </div>
               <div className="stat-group">
                 <span>Special Attack</span>
                 <div className="progress-bar"></div>
                 <span className="counter-stat">
-                  {pokemon?.stats[3].base_stat}
+                  {pokemon.stats[3].base_stat}
                 </span>
               </div>
               <div className="stat-group">
                 <span>Special Defense</span>
                 <div className="progress-bar"></div>
                 <span className="counter-stat">
-                  {pokemon?.stats[4].base_stat}
+                  {pokemon.stats[4].base_stat}
                 </span>
               </div>
               <div className="stat-group">
                 <span>Speed</span>
                 <div className="progress-bar"></div>
                 <span className="counter-stat">
-                  {pokemon?.stats[5].base_stat}
+                  {pokemon.stats[5].base_stat}
                 </span>
+                  {pokemonName}
+                  
+
               </div>
             </div>
           </div>

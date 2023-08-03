@@ -8,13 +8,13 @@ import useForm from "../Hook/useform";
 
 
   const [allPokemons, setallPokemons] = useState([]);
-  const [globalPokemons, setglobalPokemons] = useState([])
+  const [GlobalPokemons, setGlobalPokemons] = useState([])
   const [offset, setOffset] = useState(0);
 
 //////////////HOOK///////////////
 
 const {valueSearch, change, reset} = useForm({
-valueSearch: ""
+valueSearch: "",
 
 
 
@@ -53,39 +53,45 @@ valueSearch: ""
 
   const getGlobalPokemons = async () => {
     const baseURL = "https://pokeapi.co/api/v2/";
-    const res = await fetch(`${baseURL}pokemon?limit=100&offset=0`);
+    const res = await fetch(`${baseURL}pokemon?limit=800&offset=0`);
     const data = await res.json();
 
     const trust = data.results.map(async pokemon => {
       const res = await fetch(pokemon.url);
       const data = await res.json();
-     
-      console.log(data)
+      return data
       
     });
     const results = await Promise.all(trust);
-    setglobalPokemons(results);
-    setloading(false)
+    setGlobalPokemons(results);
+    
     };
     
     ////////////LLAMAR POR ID////////////////////
     const getPokemonById = async (id) => {
-      try {
+      
       const baseURL = "https://pokeapi.co/api/v2/";
       const res = await fetch(`${baseURL}pokemon/${id}`);
       const data = await res.json()
-      console.log(data)
-    } catch (error) {
-    }};
+      return data
+     };
 
 
     useEffect(() => {
       savePokemons();
-    }, []);
+    }, [offset]);
 
     useEffect(() => {
       getGlobalPokemons();
     }, []);
+
+    ////////////////////////////BOTON///////////////////////////////
+
+    const onClickLoadMore = () => {
+      setOffset(offset + 20)
+
+    } 
+    
 
     return (
       <PokemonContext.Provider
@@ -94,10 +100,10 @@ valueSearch: ""
           change,
           reset,
           allPokemons,
-          globalPokemons,
+          GlobalPokemons,
           getPokemonById,
-          active,
-          loading,
+          onClickLoadMore,
+          
         }}
       >
         {children}
