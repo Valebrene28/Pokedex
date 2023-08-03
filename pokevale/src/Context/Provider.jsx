@@ -9,8 +9,6 @@ import useForm from "../Hook/useform";
 
   const [allPokemons, setallPokemons] = useState([]);
   const [globalPokemons, setglobalPokemons] = useState([])
- 
-
   const [offset, setOffset] = useState(0);
 
 //////////////HOOK///////////////
@@ -61,8 +59,8 @@ valueSearch: ""
     const trust = data.results.map(async pokemon => {
       const res = await fetch(pokemon.url);
       const data = await res.json();
-      console.log(res)
-      return data; 
+     
+      console.log(data)
       
     });
     const results = await Promise.all(trust);
@@ -71,12 +69,14 @@ valueSearch: ""
     };
     
     ////////////LLAMAR POR ID////////////////////
-    const savePokemonsById = async(id) => {
+    const getPokemonById = async (id) => {
+      try {
       const baseURL = "https://pokeapi.co/api/v2/";
       const res = await fetch(`${baseURL}pokemon/${id}`);
       const data = await res.json()
-      return data
-    }
+      console.log(data)
+    } catch (error) {
+    }};
 
 
     useEffect(() => {
@@ -95,7 +95,9 @@ valueSearch: ""
           reset,
           allPokemons,
           globalPokemons,
-          savePokemonsById
+          getPokemonById,
+          active,
+          loading,
         }}
       >
         {children}
@@ -103,5 +105,7 @@ valueSearch: ""
     );
   };
 
+
+  
 
   

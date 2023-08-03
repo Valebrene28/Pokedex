@@ -10,12 +10,12 @@ export const Navigation = () => {
   return (
     <>
         <header className='container'>
-				<Link to='/' className='logo'>
+				
 					<img
 						src={image}
 						alt='Logo Pokedex'
 					/>
-				</Link>
+				
 {/* onSubmit={onSearchSubmit} */}
 				<form >
 					<div className='form-group'>

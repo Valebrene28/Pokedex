@@ -11,10 +11,10 @@ const AppRouter = () => {
             <Route path="/" element={<Navigation/>}>
                 <Route index element={<Home/>}/>
                 <Route path="pokemon/:id" element={<Pokemons/>}/>
-                <Route path="/search" element={<Search/>}/>
+                <Route path="search" element={<Search/>}/>
             </Route>
 
-            <Route path="*" element={<Navigate to={"/"} />} />
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
 
     )
